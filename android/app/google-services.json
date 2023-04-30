@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "14215636703",
+    "project_id": "student-management-3494e",
+    "storage_bucket": "student-management-3494e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:14215636703:android:a24ba01a9dfce27878ab6a",
+        "android_client_info": {
+          "package_name": "com.grp.smss"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "14215636703-5rsoqsp5l4rf0s88knuebb63icp6tn1j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.grp.smss",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "14215636703-v17lnacuumitkflfsts9m0295emvcqaq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZG8iM2RCr8tHGrXte6mVMosa94t_UxT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "14215636703-oam18kq111a9341pm86cd4guf0r5mcth.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "14215636703-joo79gnd353l4p5085ubm6gshlrs8geb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.grp.smss"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
