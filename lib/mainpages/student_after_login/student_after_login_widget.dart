@@ -4,18 +4,19 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'hostel_after_login_model.dart';
-export 'hostel_after_login_model.dart';
+import 'student_after_login_model.dart';
+export 'student_after_login_model.dart';
 
-class HostelAfterLoginWidget extends StatefulWidget {
-  const HostelAfterLoginWidget({Key? key}) : super(key: key);
+class StudentAfterLoginWidget extends StatefulWidget {
+  const StudentAfterLoginWidget({Key? key}) : super(key: key);
 
   @override
-  _HostelAfterLoginWidgetState createState() => _HostelAfterLoginWidgetState();
+  _StudentAfterLoginWidgetState createState() =>
+      _StudentAfterLoginWidgetState();
 }
 
-class _HostelAfterLoginWidgetState extends State<HostelAfterLoginWidget> {
-  late HostelAfterLoginModel _model;
+class _StudentAfterLoginWidgetState extends State<StudentAfterLoginWidget> {
+  late StudentAfterLoginModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final _unfocusNode = FocusNode();
@@ -23,7 +24,7 @@ class _HostelAfterLoginWidgetState extends State<HostelAfterLoginWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => HostelAfterLoginModel());
+    _model = createModel(context, () => StudentAfterLoginModel());
   }
 
   @override
@@ -59,7 +60,7 @@ class _HostelAfterLoginWidgetState extends State<HostelAfterLoginWidget> {
             },
           ),
           title: Text(
-            'Hostel Admin',
+            'Student',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Open Sans',
                   color: Colors.white,

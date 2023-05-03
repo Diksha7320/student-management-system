@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -26,8 +28,8 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
     super.initState();
     _model = createModel(context, () => HostelAdminLoginModel());
 
-    _model.textController1 ??= TextEditingController(text: 'Enter You Email');
-    _model.textController2 ??= TextEditingController(text: 'Password');
+    _model.emailController ??= TextEditingController(text: 'Enter You Email');
+    _model.passwordController ??= TextEditingController(text: 'Password');
   }
 
   @override
@@ -48,16 +50,34 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
         appBar: AppBar(
           backgroundColor: Color(0xFFF46C6C),
           automaticallyImplyLeading: false,
-          title: Text(
-            'College Admin',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Open Sans',
-                  color: Colors.white,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                  useGoogleFonts: GoogleFonts.asMap().containsKey(
-                      FlutterFlowTheme.of(context).headlineMediumFamily),
-                ),
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.chevron_left_rounded,
+              color: Color(0xFFF9FAFD),
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          title: Align(
+            alignment: AlignmentDirectional(-0.7, 0.0),
+            child: Text(
+              'Hostel Admin',
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Open Sans',
+                    color: Colors.white,
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
+            ),
           ),
           actions: [],
           centerTitle: false,
@@ -153,7 +173,7 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                                 0.8,
                                             child: TextFormField(
                                               controller:
-                                                  _model.textController1,
+                                                  _model.emailController,
                                               autofocus: true,
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -211,7 +231,7 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .titleSmall,
                                               validator: _model
-                                                  .textController1Validator
+                                                  .emailControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -221,7 +241,7 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                                     0.0, 20.0, 0.0, 0.0),
                                             child: TextFormField(
                                               controller:
-                                                  _model.textController2,
+                                                  _model.passwordController,
                                               autofocus: true,
                                               textCapitalization:
                                                   TextCapitalization.none,
@@ -300,7 +320,7 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                               validator: _model
-                                                  .textController2Validator
+                                                  .passwordControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -379,7 +399,7 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                                         'ForgotPasswordPage');
                                                   },
                                                   child: AutoSizeText(
-                                                    '                       Forgot Password',
+                                                    '                   Forgot Password',
                                                     textAlign: TextAlign.end,
                                                     style: FlutterFlowTheme.of(
                                                             context)
@@ -411,8 +431,23 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                                       0.0, 20.0, 0.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  context.pushNamed(
-                                                      'CollegeAfterLogin');
+                                                  GoRouter.of(context)
+                                                      .prepareAuthEvent();
+
+                                                  final user = await authManager
+                                                      .signInWithEmail(
+                                                    context,
+                                                    _model.emailController.text,
+                                                    _model.passwordController
+                                                        .text,
+                                                  );
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+
+                                                  context.pushNamedAuth(
+                                                      'HostelAfterLogin',
+                                                      mounted);
                                                 },
                                                 text: 'Sign In',
                                                 options: FFButtonOptions(
@@ -455,7 +490,7 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 10.0, 5.0, 5.0),
+                                                    5.0, 30.0, 5.0, 5.0),
                                             child: Text(
                                               'Don\'t have an account already? ',
                                               textAlign: TextAlign.center,
@@ -473,38 +508,57 @@ class _HostelAdminLoginWidgetState extends State<HostelAdminLoginWidget> {
                                                       ),
                                             ),
                                           ),
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, -1.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed('SignUpPage');
-                                              },
-                                              child: Text(
-                                                'Register Now',
-                                                textAlign: TextAlign.center,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Open Sans',
-                                                      color: Color(0xFFF46C6C),
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      useGoogleFonts: GoogleFonts
-                                                              .asMap()
-                                                          .containsKey(
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily),
-                                                    ),
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              FFButtonWidget(
+                                                onPressed: () async {
+                                                  context.pushNamed(
+                                                      'CreateAccount');
+                                                },
+                                                text: 'Register now',
+                                                options: FFButtonOptions(
+                                                  width: 130.0,
+                                                  height: 40.0,
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 0.0, 0.0),
+                                                  iconPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(0.0, 0.0,
+                                                              0.0, 0.0),
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  textStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .override(
+                                                            fontFamily:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmallFamily,
+                                                            color: Colors.white,
+                                                            useGoogleFonts: GoogleFonts
+                                                                    .asMap()
+                                                                .containsKey(
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmallFamily),
+                                                          ),
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                ),
                                               ),
-                                            ),
+                                            ],
                                           ),
                                         ],
                                       ),

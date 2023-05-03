@@ -129,6 +129,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   initialPage: 'HostelAfterLogin',
                   page: HostelAfterLoginWidget(),
                 ),
+        ),
+        FFRoute(
+          name: 'StudentAfterLogin',
+          path: '/studentAfterLogin',
+          builder: (context, params) => StudentAfterLoginWidget(),
+        ),
+        FFRoute(
+          name: 'RecordAttendance',
+          path: '/recordAttendance',
+          builder: (context, params) => RecordAttendanceWidget(),
+        ),
+        FFRoute(
+          name: 'MarkAttendance',
+          path: '/markAttendance',
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'MarkAttendance')
+              : MarkAttendanceWidget(),
+        ),
+        FFRoute(
+          name: 'CreateAccount',
+          path: '/createAccount',
+          builder: (context, params) => CreateAccountWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,

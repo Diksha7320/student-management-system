@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -26,8 +28,8 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
     super.initState();
     _model = createModel(context, () => StudentLoginModel());
 
-    _model.textController1 ??= TextEditingController(text: 'Enter You Email');
-    _model.textController2 ??= TextEditingController(text: 'Password');
+    _model.emailController ??= TextEditingController(text: 'Enter You Email');
+    _model.passwordController ??= TextEditingController(text: 'Password');
   }
 
   @override
@@ -48,6 +50,20 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
         appBar: AppBar(
           backgroundColor: Color(0xFFF46C6C),
           automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.chevron_left_rounded,
+              color: Color(0xFFF9FAFD),
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
           title: Text(
             'College Admin',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -157,7 +173,7 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
                                                   0.8,
                                               child: TextFormField(
                                                 controller:
-                                                    _model.textController1,
+                                                    _model.emailController,
                                                 autofocus: true,
                                                 obscureText: false,
                                                 decoration: InputDecoration(
@@ -220,7 +236,7 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall,
                                                 validator: _model
-                                                    .textController1Validator
+                                                    .emailControllerValidator
                                                     .asValidator(context),
                                               ),
                                             ),
@@ -231,7 +247,7 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
                                                     5.0, 20.0, 5.0, 5.0),
                                             child: TextFormField(
                                               controller:
-                                                  _model.textController2,
+                                                  _model.passwordController,
                                               autofocus: true,
                                               textCapitalization:
                                                   TextCapitalization.none,
@@ -310,7 +326,7 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium,
                                               validator: _model
-                                                  .textController2Validator
+                                                  .passwordControllerValidator
                                                   .asValidator(context),
                                             ),
                                           ),
@@ -375,25 +391,39 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 5.0, 5.0, 5.0),
-                                                child: AutoSizeText(
-                                                  '                       Forgot Password',
-                                                  textAlign: TextAlign.end,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Roboto',
-                                                        color:
-                                                            Color(0xFFF46C6C),
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                        'ForgotPasswordPage');
+                                                  },
+                                                  child: AutoSizeText(
+                                                    '                  Forgot Password',
+                                                    textAlign: TextAlign.end,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Roboto',
+                                                          color:
+                                                              Color(0xFFF46C6C),
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -407,8 +437,23 @@ class _StudentLoginWidgetState extends State<StudentLoginWidget> {
                                                       0.0, 20.0, 0.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
-                                                  context.pushNamed(
-                                                      'CollegeAfterLogin');
+                                                  GoRouter.of(context)
+                                                      .prepareAuthEvent();
+
+                                                  final user = await authManager
+                                                      .signInWithEmail(
+                                                    context,
+                                                    _model.emailController.text,
+                                                    _model.passwordController
+                                                        .text,
+                                                  );
+                                                  if (user == null) {
+                                                    return;
+                                                  }
+
+                                                  context.pushNamedAuth(
+                                                      'StudentAfterLogin',
+                                                      mounted);
                                                 },
                                                 text: 'Sign In',
                                                 options: FFButtonOptions(

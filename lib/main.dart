@@ -122,6 +122,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'CollegeAfterLogin': CollegeAfterLoginWidget(),
       'HostelAfterLogin': HostelAfterLoginWidget(),
+      'MarkAttendance': MarkAttendanceWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
     return Scaffold(
@@ -147,6 +148,11 @@ class _NavBarPageState extends State<NavBarPage> {
           GButton(
             icon: Icons.home_outlined,
             text: 'Home',
+            iconSize: 24.0,
+          ),
+          GButton(
+            icon: Icons.home_outlined,
+            text: '',
             iconSize: 24.0,
           ),
           GButton(

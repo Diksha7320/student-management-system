@@ -43,7 +43,7 @@ class _ChoosingLoginWidgetState extends State<ChoosingLoginWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xC1EBA4A4),
+          backgroundColor: Color(0xFFF46C6C),
           automaticallyImplyLeading: false,
           title: Text(
             'Who are you?',

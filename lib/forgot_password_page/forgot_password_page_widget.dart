@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -26,7 +27,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
     super.initState();
     _model = createModel(context, () => ForgotPasswordPageModel());
 
-    _model.textController ??= TextEditingController();
+    _model.emailTextController ??= TextEditingController();
   }
 
   @override
@@ -107,7 +108,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                        controller: _model.textController,
+                        controller: _model.emailTextController,
                         autofocus: true,
                         obscureText: false,
                         decoration: InputDecoration(
@@ -115,7 +116,7 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                           hintStyle: FlutterFlowTheme.of(context).bodySmall,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color(0xFFEB9595),
+                              color: Color(0xFFF46C6C),
                               width: 2.0,
                             ),
                             borderRadius: BorderRadius.circular(20.0),
@@ -143,8 +144,8 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                           ),
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium,
-                        validator:
-                            _model.textControllerValidator.asValidator(context),
+                        validator: _model.emailTextControllerValidator
+                            .asValidator(context),
                       ),
                     ),
                   ],
@@ -158,7 +159,20 @@ class _ForgotPasswordPageWidgetState extends State<ForgotPasswordPageWidget> {
                   children: [
                     FFButtonWidget(
                       onPressed: () async {
-                        context.safePop();
+                        if (_model.emailTextController.text.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Email required!',
+                              ),
+                            ),
+                          );
+                          return;
+                        }
+                        await authManager.resetPassword(
+                          email: _model.emailTextController.text,
+                          context: context,
+                        );
                       },
                       text: 'Reset Password',
                       options: FFButtonOptions(

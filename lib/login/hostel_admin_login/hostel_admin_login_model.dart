@@ -1,3 +1,5 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -10,13 +12,13 @@ class HostelAdminLoginModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
-  // State field(s) for TextField widget.
-  TextEditingController? textController1;
-  String? Function(BuildContext, String?)? textController1Validator;
-  // State field(s) for TextField widget.
-  TextEditingController? textController2;
+  // State field(s) for Email widget.
+  TextEditingController? emailController;
+  String? Function(BuildContext, String?)? emailControllerValidator;
+  // State field(s) for Password widget.
+  TextEditingController? passwordController;
   late bool passwordVisibility;
-  String? Function(BuildContext, String?)? textController2Validator;
+  String? Function(BuildContext, String?)? passwordControllerValidator;
   // State field(s) for Checkbox widget.
   bool? checkboxValue;
 
@@ -27,8 +29,8 @@ class HostelAdminLoginModel extends FlutterFlowModel {
   }
 
   void dispose() {
-    textController1?.dispose();
-    textController2?.dispose();
+    emailController?.dispose();
+    passwordController?.dispose();
   }
 
   /// Additional helper methods are added here.

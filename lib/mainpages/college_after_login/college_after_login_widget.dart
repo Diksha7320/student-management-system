@@ -1,3 +1,4 @@
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -42,14 +43,29 @@ class _CollegeAfterLoginWidgetState extends State<CollegeAfterLoginWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFFEB9595),
+          backgroundColor: Color(0xFFF46C6C),
           automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.chevron_left_rounded,
+              color: Color(0xFFF9FAFD),
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
           title: Text(
-            'College',
+            'College Admin',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  fontFamily: 'Open Sans',
                   color: Colors.white,
-                  fontSize: 22.0,
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
                   useGoogleFonts: GoogleFonts.asMap().containsKey(
                       FlutterFlowTheme.of(context).headlineMediumFamily),
                 ),
@@ -59,9 +75,90 @@ class _CollegeAfterLoginWidgetState extends State<CollegeAfterLoginWidget> {
           elevation: 2.0,
         ),
         body: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [],
+          child: Align(
+            alignment: AlignmentDirectional(0.0, 0.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(40.0, 40.0, 40.0, 40.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 5.0,
+                    buttonSize: 150.0,
+                    fillColor: Color(0xC1EBA4A4),
+                    icon: Icon(
+                      Icons.format_list_bulleted,
+                      color: Color(0xFFF04D4D),
+                      size: 100.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed(
+                        'RecordAttendance',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.leftToRight,
+                          ),
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Text(
+                  'Record Attendance',
+                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyLargeFamily),
+                      ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(80.0, 80.0, 80.0, 80.0),
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30.0,
+                    borderWidth: 5.0,
+                    buttonSize: 150.0,
+                    fillColor: Color(0xC1EBA4A4),
+                    icon: Icon(
+                      Icons.person_search_sharp,
+                      color: Color(0xFFF04D4D),
+                      size: 100.0,
+                    ),
+                    onPressed: () async {
+                      context.pushNamed(
+                        'StudentLogin',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.leftToRight,
+                          ),
+                        },
+                      );
+                    },
+                  ),
+                ),
+                Text(
+                  'View Attendance',
+                  style: FlutterFlowTheme.of(context).bodyLarge.override(
+                        fontFamily:
+                            FlutterFlowTheme.of(context).bodyLargeFamily,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        useGoogleFonts: GoogleFonts.asMap().containsKey(
+                            FlutterFlowTheme.of(context).bodyLargeFamily),
+                      ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

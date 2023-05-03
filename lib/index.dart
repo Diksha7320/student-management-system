@@ -14,3 +14,10 @@ export '/mainpages/college_after_login/college_after_login_widget.dart'
     show CollegeAfterLoginWidget;
 export '/mainpages/hostel_after_login/hostel_after_login_widget.dart'
     show HostelAfterLoginWidget;
+export '/mainpages/student_after_login/student_after_login_widget.dart'
+    show StudentAfterLoginWidget;
+export '/mainpages/record_attendance/record_attendance_widget.dart'
+    show RecordAttendanceWidget;
+export '/mainpages/mark_attendance/mark_attendance_widget.dart'
+    show MarkAttendanceWidget;
+export '/create_account/create_account_widget.dart' show CreateAccountWidget;
